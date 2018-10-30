@@ -25,6 +25,10 @@ public class Login extends AppCompatActivity {
         username = ed_username.getText().toString();
         password = ed_password.getText().toString();
         if("Steven".equals(username) && "123456789".equals(password)){
+            setResult(RESULT_OK);
+            finish();
+        }else {
+            setResult(RESULT_CANCELED);
             finish();
         }
     }
