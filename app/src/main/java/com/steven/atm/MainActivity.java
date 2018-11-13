@@ -23,6 +23,10 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == RC_LOGIN){
             if(resultCode != RESULT_OK ){
                 finish();
+            }else{
+                //TODO: if nickname / age /gender exist
+                Intent nickname = new Intent(this,NicknameActivity.class);
+                startActivity(nickname);
             }
         }
     }
