@@ -17,14 +17,22 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ed_username = findViewById(R.id.ed_username);
+        ed_password = findViewById(R.id.ed_password);
+        String username = getSharedPreferences("atm",MODE_PRIVATE)
+                .getString("USERID","");
+        ed_username.setText(username);
     }
 
     public void Login(View view){
-        ed_username = findViewById(R.id.ed_username);
-        ed_password = findViewById(R.id.ed_password);
         username = ed_username.getText().toString();
         password = ed_password.getText().toString();
         if("Steven".equals(username) && "123456789".equals(password)){
+            //存取資料
+            getSharedPreferences("atm",MODE_PRIVATE)
+                    .edit()
+                    .putString("USERID",username)
+                    .apply();
             setResult(RESULT_OK);
             finish();
         }else {
