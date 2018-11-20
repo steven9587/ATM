@@ -9,7 +9,7 @@ import android.widget.EditText;
 public class AgeActivity extends AppCompatActivity {
 
     private EditText edAge;
-    private String age;
+    private int age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +18,10 @@ public class AgeActivity extends AppCompatActivity {
     }
     public void next(View view){
         edAge = findViewById(R.id.ed_age);
-        age = edAge.getText().toString();
+        age = Integer.parseInt(edAge.getText().toString());
         getSharedPreferences("user",MODE_PRIVATE)
                 .edit()
-                .putString("USERAGE", age)
+                .putInt("USERAGE", age)
                 .apply();
         Intent gender = new Intent(this,GenderActivity.class);
         startActivity(gender);
