@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-public class GenderActivity extends AppCompatActivity {
+public class GenderActivity extends BasaActivity {
 
     private EditText edGender;
     private int gender;
@@ -19,10 +19,11 @@ public class GenderActivity extends AppCompatActivity {
     public void next(View view){
         edGender = findViewById(R.id.ed_gender);
         gender = Integer.parseInt(edGender.getText().toString());
-        getSharedPreferences("user",MODE_PRIVATE)
-                .edit()
-                .putInt("USERGENDER",gender)
-                .apply();
+//        getSharedPreferences("user",MODE_PRIVATE)
+//                .edit()
+//                .putInt("USERGENDER",gender)
+//                .apply();
+        user.setGender(gender);
         Intent mainactivity = new Intent(this,MainActivity.class);
         //setResult(RESULT_OK);
         mainactivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
