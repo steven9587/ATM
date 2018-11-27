@@ -3,10 +3,16 @@ package com.steven.atm;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends BasaActivity {
     private static final int RC_LOGIN = 100;
     boolean login = false;
+    List<String> fruits = Arrays.asList("香蕉","鳳梨","芭樂");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +22,17 @@ public class MainActivity extends BasaActivity {
             //startActivity(intent);
             startActivityForResult(intent,RC_LOGIN);
         }
+        //listView建立清單
+        listView();
     }
+
+    private void listView() {
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,fruits);
+        ListView listView = findViewById(R.id.list);
+        listView.setAdapter(adapter);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
