@@ -3,6 +3,8 @@ package com.steven.atm;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -23,7 +25,12 @@ public class MainActivity extends BasaActivity {
             startActivityForResult(intent,RC_LOGIN);
         }
         //listView建立清單
-        listView();
+        //listView();
+        RecyclerView recyclerView = findViewById(R.id.recycler);
+        //確定大小是否固定
+        recyclerView.setHasFixedSize(true);
+        //new出linear(一列一列的)
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void listView() {
