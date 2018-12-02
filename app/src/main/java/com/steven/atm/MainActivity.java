@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MainActivity extends BasaActivity {
     private static final int RC_LOGIN = 100;
-    boolean login = false;
+    boolean login = true;
     List<String> fruits = Arrays.asList("香蕉", "鳳梨", "芭樂");
 
     @Override
@@ -34,7 +34,7 @@ public class MainActivity extends BasaActivity {
         //listView建立清單
         //listView();
         RecyclerView recyclerView = findViewById(R.id.recycler);
-        //確定大小是否固定
+        //確定size是否固定(也就是有無加入或刪除東西)，避免每次都重畫表格
         recyclerView.setHasFixedSize(true);
         //new出linear(一列一列的)
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -46,7 +46,8 @@ public class MainActivity extends BasaActivity {
         @Override
         public FruitViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             Context context = parent.getContext();
-            View view = LayoutInflater.from(context).inflate(android.R.layout.simple_list_item_1,parent,false);
+            View view = LayoutInflater.from(context)
+                    .inflate(android.R.layout.simple_list_item_1,parent,false);
             FruitViewHolder fruitViewHolder = new FruitViewHolder(view);
             return fruitViewHolder;
         }
@@ -65,7 +66,7 @@ public class MainActivity extends BasaActivity {
             TextView fruitname;
             public FruitViewHolder(View itemView) {
                 super(itemView);
-                fruitname = findViewById(android.R.id.text1);
+                fruitname = itemView.findViewById(android.R.id.text1);
             }
         }
     }
