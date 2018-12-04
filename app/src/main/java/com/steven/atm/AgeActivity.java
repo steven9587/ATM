@@ -1,20 +1,30 @@
 package com.steven.atm;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class AgeActivity extends BasaActivity {
 
     private EditText edAge;
     private int age;
-
+    int[] ageChoose = {19,20,21,22,23,24,25};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_age);
+        RecyclerView ageRecycler =findViewById(R.id.recycler);
+        ageRecycler.setHasFixedSize(true);
+        ageRecycler.setLayoutManager(new LinearLayoutManager(this));
+        ageRecycler.setAdapter(new ageAdapter());
     }
     public void next(View view){
         edAge = findViewById(R.id.ed_age);
@@ -30,5 +40,35 @@ public class AgeActivity extends BasaActivity {
 
     public void back(View view){
         finish();
+    }
+
+    class ageAdapter extends RecyclerView.Adapter<ageAdapter.ageViewHolder>{
+        @NonNull
+        @Override
+        //把設計圖變成可用的view(XML→View)
+        public ageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = getLayoutInflater().inflate(R.layout.age_row,parent,false);
+            return new ageViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ageViewHolder holder, int position) {
+            holder.ageText.setText(ageChoose[position]);
+        }
+
+        @Override
+        //有幾個?
+        public int getItemCount() {
+            return ageChoose.length;
+        }
+
+        class ageViewHolder extends RecyclerView.ViewHolder{
+            //讀取XML
+            TextView ageText;
+            public ageViewHolder(View itemView) {
+                super(itemView);
+                ageText = itemView.findViewById(R.id.ageText);
+            }
+        }
     }
 }
