@@ -1,6 +1,7 @@
 package com.steven.atm;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -53,7 +54,10 @@ public class AgeActivity extends BasaActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ageViewHolder holder, int position) {
-            holder.ageText.setText(ageChoose[position]);
+            holder.ageText.setText(ageChoose[position]+"");
+            if(ageChoose[position] == 19){
+                holder.ageText.setTextColor(Color.RED);
+            }
         }
 
         @Override

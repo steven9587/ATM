@@ -19,7 +19,7 @@ import java.util.List;
 
 public class MainActivity extends BasaActivity {
     private static final int RC_LOGIN = 100;
-    boolean login = true;
+    boolean login = false;
     List<String> fruits = Arrays.asList("香蕉", "鳳梨", "芭樂");
 
     @Override
