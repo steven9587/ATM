@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class AgeActivity extends BasaActivity {
     private EditText edAge;
     private int age;
     int[] ageChoose = {19,20,21,22,23,24,25};
+    String[] rainbow= null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +28,11 @@ public class AgeActivity extends BasaActivity {
         ageRecycler.setHasFixedSize(true);
         ageRecycler.setLayoutManager(new LinearLayoutManager(this));
         ageRecycler.setAdapter(new ageAdapter());
-    }
-    public void next(View view){
         edAge = findViewById(R.id.ed_age);
+        rainbow = getResources().getStringArray(R.array.raincow);
+    }
+
+    public void next(View view){
         age = Integer.parseInt(edAge.getText().toString());
 //        getSharedPreferences("user",MODE_PRIVATE)
 //                .edit()
@@ -53,11 +57,22 @@ public class AgeActivity extends BasaActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ageViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ageViewHolder holder, final int position) {
             holder.ageText.setText(ageChoose[position]+"");
-            if(ageChoose[position] == 19){
-                holder.ageText.setTextColor(Color.RED);
-            }
+            holder.itemView.setBackgroundColor(Color.parseColor(rainbow[position%7]));
+            //19便紅字
+            // if(ageChoose[position] == 19){
+            // holder.ageText.setTextColor(Color.RED);
+            // }
+            //若用ageText 則一定要點在自上才有反應
+            //holder.ageText.setOnClickListener(new View.OnClickListener() {
+             holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("AgeActivity","onClick" + ageChoose[position]);
+                    edAge.setText(ageChoose[position]+"");
+                }
+            });
         }
 
         @Override
